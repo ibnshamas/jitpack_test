@@ -1,8 +1,22 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-}
+    id("maven-publish")
 
+
+}
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.ibnshamas"
+                artifactId = "jitpack-test-lib"
+                version = "1.0.0"
+            }
+        }
+    }
+}
 android {
     namespace = "com.acmosoft.jitpacktestlib"
     compileSdk = 34
